@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TadaAPI.Data;
+using Tada.API.Data;
 
 namespace Tada.API.Migrations
 {
@@ -17,7 +17,7 @@ namespace Tada.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.0-preview.3.20181.2");
 
-            modelBuilder.Entity("TadaAPI.Models.Value", b =>
+            modelBuilder.Entity("Tada.API.Models.Value", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

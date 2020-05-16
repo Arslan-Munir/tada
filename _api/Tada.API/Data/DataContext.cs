@@ -1,12 +1,13 @@
-using TadaAPI.Models;
+using Tada.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace TadaAPI.Data
+namespace Tada.API.Data
 {
     public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options){}
         
         public DbSet<Value> Values { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

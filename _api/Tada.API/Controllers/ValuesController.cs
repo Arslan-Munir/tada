@@ -4,14 +4,16 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using TadaAPI.Data;
+using Tada.API.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyWebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
         private readonly DataContext _dataContext;
@@ -28,7 +30,7 @@ namespace MyWebAPI.Controllers
             return Ok(values);
         }
 
-        // GET: api/values/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {

@@ -1,4 +1,4 @@
-namespace TadaAPI.Models
+namespace Tada.API.Models
 {
     public class Value
     {
