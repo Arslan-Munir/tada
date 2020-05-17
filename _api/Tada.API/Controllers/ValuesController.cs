@@ -22,7 +22,7 @@ namespace MyWebAPI.Controllers
             _dataContext = dataContext;
         }
 
-        // GET: api/values
+        [AllowAnonymous]
         public async Task<IActionResult> GetValues()
         {
             var values = await _dataContext.Values.ToListAsync();
