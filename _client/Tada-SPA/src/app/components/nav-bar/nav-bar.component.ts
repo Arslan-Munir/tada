@@ -17,10 +17,9 @@ export class NavBarComponent implements OnInit {
   login() {
     this.authService.login(this.model)
       .subscribe(next => {
-        console.log(next);
         console.log('Login successful.');
       }, errors => {
-          console.log('Failed to login.');
+          console.log(errors);
       });
   }
 
