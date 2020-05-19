@@ -1,4 +1,8 @@
-.navbar-brand{
-    font-weight: 500;
-    font-size: 25px;
+.navbar-brand {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.mt-3 {
+     margin-top: 1.6rem!important;
 }
