@@ -36,7 +36,11 @@ export class AuthService {
     return !this.jwtHelper.isTokenExpired(token);
   }
 
-  decodeToken(token: string) {
+  decodeToken(token?: string) {
+    if (!token) {
+      token = localStorage.getItem('token');
+    }
+
     return this.jwtHelper.decodeToken(token);
   }
 
