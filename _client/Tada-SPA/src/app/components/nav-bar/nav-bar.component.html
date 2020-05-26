@@ -42,15 +42,18 @@
             dropdown 
             class="dropdown"
             *ngIf="loggedIn()">
+                <span class="mr-2">
+                    <img src="{{photoUrl}}" alt="">
+                </span>
                 <a 
                     dropdownToggle
                     (click)="false"
-                    class="dropdown-toggle text-light">
+                    class="dropdown-toggle text-light mt-2">
                         Welcome {{authService.decodedToken?.unique_name}}
                 </a>
                 <div
                     *dropdownMenu 
-                    class="dropdown-menu mt-3">
+                    class="dropdown-menu mt-2">
                         <a 
                             class="dropdown-item"
                             routerLink="/member/edit">

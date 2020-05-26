@@ -3,6 +3,13 @@
     font-size: 2rem;
 }
 
-.mt-3 {
-     margin-top: 1.6rem!important;
+.mt-2 {
+     margin-top: 0.9rem!important;
+}
+
+img{
+    max-height: 50px;
+    border: 2px solid white;
+    border-radius: 100%;
+    display: inline-block;
 }

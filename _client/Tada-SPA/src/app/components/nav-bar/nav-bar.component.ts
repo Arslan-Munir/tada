@@ -11,10 +11,12 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavBarComponent implements OnInit {
 
   model: any = {};
+  photoUrl: string;
 
   constructor(public authService: AuthService, private alert: AlertifyService, private route: Router) { }
 
   ngOnInit(): void {
+    this.authService.photoUrl.subscribe(url => this.photoUrl = url);
   }
 
   login() {
@@ -34,6 +36,10 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authService.decodedToken = null;
+    this.authService.currentUser = null;
+
     this.alert.message('Logout successful');
     this.route.navigateByUrl('/');
   }

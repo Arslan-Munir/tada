@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { FileUploadModule } from 'ng2-file-upload';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { MemberCardComponent } from './components/members/member-card/member-car
 import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
 import { MemberEditComponent } from './components/members/member-edit/member-edit.component';
 import { MemberListComponent } from './components/members/member-list/member-list.component';
+import { PhotoEditorComponent } from './components/members/photo-editor/photo-editor.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -43,7 +45,8 @@ function tokenGetter() {
     MessagesComponent,
     MemberCardComponent,
     MemberDetailComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ function tokenGetter() {
     TabsModule.forRoot(),
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
+    FileUploadModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,

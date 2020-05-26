@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -16,11 +17,13 @@ namespace Tada.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly IConfiguration _config;
         private readonly IAuthRepository _authRepository;
 
-        public AuthController(IConfiguration config, IAuthRepository authRepository)
+        public AuthController(IMapper mapper, IConfiguration config, IAuthRepository authRepository)
         {
+            _mapper = mapper;
             _config = config;
             _authRepository = authRepository;
         }
@@ -29,7 +32,7 @@ namespace Tada.API.Controllers
         public async Task<IActionResult> Register(UserToRegisterDto dto)
         {
             dto.Username = dto.Username.ToLower();
-            if(await _authRepository.UserExists(dto.Username))
+            if (await _authRepository.UserExists(dto.Username))
                 return BadRequest("Username already exists");
 
             var userToRegister = new User
@@ -44,15 +47,15 @@ namespace Tada.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserToLoginDto dto)
         {
-            var user = await _authRepository.Login(dto.Username.ToLower(), dto.Password);
+            var userFromRepo = await _authRepository.Login(dto.Username.ToLower(), dto.Password);
 
-            if(user == null)
+            if (userFromRepo == null)
                 return Unauthorized();
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
+                new Claim(ClaimTypes.Name, userFromRepo.Username)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8
@@ -67,10 +70,12 @@ namespace Tada.API.Controllers
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
+            var user = _mapper.Map<UserForListDto>(userFromRepo);
 
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                token = tokenHandler.WriteToken(token),
+                user
             });
         }
     }
