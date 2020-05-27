@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tada.API.Data.Interfaces;
 using Tada.API.Dtos;
+using Tada.API.Helpers;
 
 namespace Tada.API.Controllers
 {
     [Authorize]
-    [Route("api/[Controller]")]
     [ApiController]
+    [Route("api/[Controller]")]
+    [ServiceFilter(typeof(LogUserActivity))]
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository _repo;

@@ -7,9 +7,9 @@ import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListsComponent } from './components/lists/lists.component';
@@ -23,13 +23,13 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
+import { TimeAgoExtendsPipe } from './pipes/time-ago-extends.pipe';
 import { MemberDetailResolver } from './resolvers/member-detail.resolver';
 import { MemberEditResolver } from './resolvers/member-edit.resolver';
 import { MemberListResolver } from './resolvers/member-list.resolver';
 import { appRoutes } from './routes';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
-
 
 function tokenGetter() {
   return localStorage.getItem('token');
@@ -47,7 +47,8 @@ function tokenGetter() {
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    TimeAgoExtendsPipe
   ],
   imports: [
     BrowserModule,
@@ -81,3 +82,4 @@ function tokenGetter() {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

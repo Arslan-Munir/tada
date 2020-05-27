@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Tada.API.Data.Interfaces;
 using Tada.API.Dtos;
+using Tada.API.Helpers;
 using Tada.API.Models;
 
 namespace Tada.API.Controllers
