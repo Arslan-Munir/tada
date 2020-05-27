@@ -1,29 +1,110 @@
-<form #registerForm="ngForm" (ngSubmit)="register()">
+<form [formGroup]="registrationForm" (ngSubmit)="register()">
+    
     <h2 class="text-center text-primary">Sign Up</h2>
     <hr>
 
     <div class="form-group">
-        <input
-            required 
-            type="text" 
-            class="form-control" 
-            placeholder="Username"
-            name="username" 
-            [(ngModel)]="model.username"/>
+        <label 
+            class="control-label" 
+            style="margin-right:10px">I am a: </label>
+
+        <label class="radio-inline">
+            <input 
+                class="mr-3" 
+                type="radio" 
+                value="male" 
+                formControlName="gender">Male
+        </label>
+
+        <label class="radio-inline ml-3">
+            <input 
+                class="mr-3" 
+                type="radio" 
+                value="female" 
+                formControlName="gender">Female
+        </label>
     </div>
 
     <div class="form-group">
         <input
-            required
+            type="text" 
+            class="form-control" 
+            placeholder="Known As"
+            formControlName="knownAs"
+            [ngClass]="{'is-invalid': invalidKnownAs()}"/>
+        <div class="invalid-feedback">Known as is required.</div>
+    </div>
+    
+    <div class="form-group">
+        <input
+            type="text" 
+            class="form-control" 
+            placeholder="Date of Birth"
+            formControlName="dateOfBirth"
+            bsDatepicker
+            [bsConfig]="bsConfig"
+            [ngClass]="{'is-invalid': invalidDateOfBirth()}"/>
+        <div class="invalid-feedback">Date of Birth is required.</div>
+    </div>
+    
+    <div class="form-group">
+        <input
+            type="text" 
+            class="form-control" 
+            placeholder="City"
+            formControlName="city"
+            [ngClass]="{'is-invalid': invalidCity()}"/>
+        <div class="invalid-feedback">City is required.</div>
+    </div>
+    
+    <div class="form-group">
+        <input
+            type="text" 
+            class="form-control" 
+            placeholder="Country"
+            formControlName="country"
+            [ngClass]="{'is-invalid': invalidCountry()}"/>
+        <div class="invalid-feedback">Country is required.</div>
+    </div>
+    
+    <div class="form-group">
+        <input
+            type="text" 
+            class="form-control" 
+            placeholder="Username"
+            formControlName="username"
+            [ngClass]="{'is-invalid': invalidUserName()}"/>
+        <div class="invalid-feedback">Please choose a username.</div>
+    </div>
+
+    <div class="form-group">
+        <input
             type="password" 
             class="form-control" 
             placeholder="Password"
-            name="password"
-            [(ngModel)]="model.password"/>
+            formControlName="password"
+            [ngClass]="{'is-invalid': invalidPassword()}"/>
+        <div class="invalid-feedback">Please choose password b/w 4-8 characters.</div>
+    </div>
+
+    <div class="form-group">
+        <input
+            type="password" 
+            class="form-control" 
+            placeholder="Confirm Password"
+            formControlName="confirmPassword"
+            [ngClass]="{'is-invalid':passwordMissMatch()}"/>
+        
+        <div class="invalid-feedback">Password and Confirm Password must match.</div>
     </div>
 
     <div class="form-group text-center">
-        <button class="btn btn-success mr-2" type="submit">Register</button>
+        <button 
+            class="btn btn-success mr-2" 
+            type="submit"
+            [disabled]="!registrationForm.valid">
+                Register
+        </button>
         <button 
             class="btn btn-light" 
             type="button"

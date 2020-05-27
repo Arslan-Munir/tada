@@ -23,7 +23,7 @@ namespace Tada.API.Controllers
             _repo = userRepository;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetUser")]
         public async Task<IActionResult> Get(int id)
         {
             var user = await _repo.Get(id);

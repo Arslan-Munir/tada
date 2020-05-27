@@ -35,13 +35,10 @@ namespace Tada.API.Controllers
             if (await _authRepository.UserExists(dto.Username))
                 return BadRequest("Username already exists");
 
-            var userToRegister = new User
-            {
-                Username = dto.Username
-            };
-
+            var userToRegister = _mapper.Map<User>(dto);
             var registeredUser = await _authRepository.Register(userToRegister, dto.Password);
-            return StatusCode(201);
+            var userToReturn = _mapper.Map<UserForDetailedDto>(registeredUser);
+            return CreatedAtRoute("GetUser", new {controller = "Users", id = registeredUser.Id}, userToReturn);
         }
 
         [HttpPost("login")]

@@ -25,6 +25,7 @@ namespace Tada.API.Helpers
             CreateMap<Photo, PhotoToReturnDto>();
             CreateMap<PhotoToSaveDto, Photo>();
             CreateMap<UserToUpdateDto, User>();
+            CreateMap<UserToRegisterDto, User>();
         }
     }
 }
