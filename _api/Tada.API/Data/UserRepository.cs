@@ -29,6 +29,18 @@ namespace Tada.API.Data
             users = users.Where(u => u.Id != userParams.UserId);
             users = users.Where(u => u.Gender == userParams.Gender);
 
+            if(userParams.Likers)
+            {
+                var userLikers = await UserLikes(userParams.UserId, userParams.Likers);
+                users = users.Where(u => userLikers.Contains(u.Id));
+            }
+            
+            if(userParams.Likees)
+            {
+                var userLikees = await UserLikes(userParams.UserId, userParams.Likers);
+                users = users.Where(u => userLikees.Contains(u.Id));
+            }
+
             if(userParams.MinAge != 18 || userParams.MaxAge != 99)
             {
                 var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
@@ -49,6 +61,19 @@ namespace Tada.API.Data
                 }
             }
             return await PagedList<User>.CreateAsync(users, userParams.CurrentPage, userParams.ItemsPerPage);
+        }
+
+        private async Task<IEnumerable<int>> UserLikes(int id, bool likers)
+        {
+            var user = await _context.Users
+                .Include(x => x.Likers)
+                .Include(x => x.Likees)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if(likers)
+                return user.Likers.Where(u => u.LikeeId == id).Select(i => i.LikerId);
+            else
+                return user.Likees.Where(u => u.LikerId == id).Select(i=>i.LikeeId);
         }
     }
 }

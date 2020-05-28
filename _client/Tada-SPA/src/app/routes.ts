@@ -7,6 +7,7 @@ import { MemberListComponent } from './components/members/member-list/member-lis
 import { MessagesComponent } from './components/messages/messages.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
+import { ListsResolver } from './resolvers/lists-resolver';
 import { MemberDetailResolver } from './resolvers/member-detail.resolver';
 import { MemberEditResolver } from './resolvers/member-edit.resolver';
 import { MemberListResolver } from './resolvers/member-list.resolver';
@@ -27,7 +28,7 @@ export const appRoutes: Routes = [
             },
             { path: 'member/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver} },
             { path: 'messages', component: MessagesComponent },
-            { path: 'lists', component: ListsComponent },
+            { path: 'lists', component: ListsComponent, resolve: {users: ListsResolver} },
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

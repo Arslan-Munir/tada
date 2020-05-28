@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tada.API.Data.Interfaces;
 using Tada.API.Dtos;
 using Tada.API.Helpers;
+using Tada.API.Models;
 
 namespace Tada.API.Controllers
 {
@@ -17,12 +18,15 @@ namespace Tada.API.Controllers
     [ServiceFilter(typeof(LogUserActivity))]
     public class UsersController : ControllerBase
     {
-        private readonly IUserRepository _repo;
         private readonly IMapper _mapper;
-        public UsersController(IMapper mapper, IUserRepository userRepository)
+        private readonly IUserRepository _repo;
+        private readonly ILikeRepository _likeRepository;
+
+        public UsersController(IMapper mapper, IUserRepository userRepository, ILikeRepository likeRepository)
         {
             _mapper = mapper;
             _repo = userRepository;
+            _likeRepository = likeRepository;
         }
 
         [HttpGet("{id}", Name="GetUser")]
@@ -38,6 +42,7 @@ namespace Tada.API.Controllers
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var currentUser = await _repo.Get(currentUserId);
+            userParams.UserId = currentUserId;
             if(string.IsNullOrWhiteSpace(userParams.Gender))
             {
                 userParams.Gender = currentUser.Gender == "male" ? "female" : "male";
@@ -61,6 +66,32 @@ namespace Tada.API.Controllers
                 return NoContent();
 
             throw new Exception($"Updating user {id} failed on save");
+        }
+
+        [HttpPost("{likerId}/like/{likeeId}")]
+        public async Task<IActionResult> LikeUser(int likerId, int likeeId)
+        {
+            if (likerId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var doesLike = await _likeRepository.DoesLike(likerId, likeeId);
+            if(doesLike != null)
+                return BadRequest("Already liked!");
+
+            if(await _repo.Get(likeeId) == null)
+                return NotFound();
+
+            var like = new Like
+            {
+                LikerId = likerId,
+                LikeeId = likeeId
+            };
+
+            _likeRepository.Add(like);
+            if(await _likeRepository.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to like!");
         }
     }
 }

@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
@@ -25,13 +26,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
 import { TimeAgoExtendsPipe } from './pipes/time-ago-extends.pipe';
+import { ListsResolver } from './resolvers/lists-resolver';
 import { MemberDetailResolver } from './resolvers/member-detail.resolver';
 import { MemberEditResolver } from './resolvers/member-edit.resolver';
 import { MemberListResolver } from './resolvers/member-list.resolver';
 import { appRoutes } from './routes';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 function tokenGetter() {
   return localStorage.getItem('token');
@@ -78,6 +79,7 @@ function tokenGetter() {
   providers: [
     AuthService,
     UserService,
+    ListsResolver,
     MemberListResolver,
     MemberEditResolver,
     MemberDetailResolver,
