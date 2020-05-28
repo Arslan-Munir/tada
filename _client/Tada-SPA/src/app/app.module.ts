@@ -9,6 +9,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -30,6 +31,7 @@ import { MemberListResolver } from './resolvers/member-list.resolver';
 import { appRoutes } from './routes';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 function tokenGetter() {
   return localStorage.getItem('token');
@@ -57,6 +59,9 @@ function tokenGetter() {
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
     TabsModule.forRoot(),
     HttpClientModule,
     RouterModule.forRoot(appRoutes),

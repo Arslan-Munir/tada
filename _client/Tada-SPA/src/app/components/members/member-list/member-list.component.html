@@ -1,9 +1,121 @@
-<div class="container mt-5">
-    <div class="row">
-        <div 
-            class="col-lg-2 col-md-3 col-sm-6"
-            *ngFor="let user of users">
-            <member-card [user]="user"></member-card>
+<div class="row">
+    <div class="container pt-5 pl-5 col-lg-2 col-md-6 col-sm-6">
+        <div class="mt-4">
+            <h2>Sort by</h2>
+            <div class="btn-group">
+                <button 
+                    type="button" 
+                    name="orderBy" 
+                    class="btn btn-primary"
+                    btnRadio="lastActive"
+                    [(ngModel)]="userParams.orderBy"
+                    (click)="loadUsers()">
+                    Last Active
+                </button>
+                <button 
+                    type="button" 
+                    name="orderBy" 
+                    class="btn btn-primary"
+                    btnRadio="created"
+                    [(ngModel)]="userParams.orderBy"
+                    (click)="loadUsers()">
+                    Newest Members
+                </button>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h2>Filters by</h2>
+            <form 
+                class="mt-4" 
+                #form="ngForm"
+                (ngSubmit)="loadUsers()"
+                novalidate>
+                <div class="form-group mb-2">
+                    <input 
+                        type="number" 
+                        class="form-control" 
+                        style="width: 55%" 
+                        id="minAge" 
+                        name="minAge"
+                        placeholder="Age From"
+                        [(ngModel)]="userParams.minAge">
+                </div>
+
+                <div class="form-group mb-2">
+                    <input 
+                        type="number" 
+                        class="form-control" 
+                        style="width: 55%" 
+                        id="maxAge" 
+                        name="maxAge"
+                        placeholder="Age To"
+                        [(ngModel)]="userParams.maxAge">
+                </div>
+
+                <div class="form-group mb-2">
+                    <select 
+                        class="form-control selectpicker" 
+                        style="width: 55%" 
+                        id="gender" 
+                        name="gender"
+                        [(ngModel)]="userParams.gender">
+                            <option 
+                                *ngFor="let gender of genderList"
+                                [value]="gender.value">
+                                {{gender.display}}
+                            </option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <button 
+                        type="submit" 
+                        class="btn btn-primary mr-2">
+                            Apply
+                    </button>
+
+                    <button 
+                        type="button" 
+                        class="btn btn-info"
+                        (click)="resetFilters()">
+                            Reset
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="col-lg-10">
+        <div class="text-center mt-4">
+        <h2>{{pagination.totalItems}} Matches Found</h2>
+        </div>
+        <div class="container mt-4">
+            <div class="row">
+                <div 
+                    class="col-lg-2 col-md-3 col-sm-6" 
+                    *ngFor="let user of users">
+                        <member-card 
+                            [user]="user">
+                        </member-card>
+                </div>
+            </div>
         </div>
     </div>
+
+</div>
+
+<div class="d-flex justify-content-center">
+    <pagination
+        previousText="&lsaquo;" 
+        nextText="&rsaquo;" 
+        firstText="&laquo;" 
+        lastText="&raquo;"
+        [boundaryLinks]="true" 
+        [(ngModel)]="pagination.currentPage"
+        [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage"
+        (pageChanged)="pageChanged($event)">
+    </pagination>
 </div>
