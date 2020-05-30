@@ -33,6 +33,8 @@ import { MemberListResolver } from './resolvers/member-list.resolver';
 import { appRoutes } from './routes';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+import { MessagesResolver } from './resolvers/messages.resolver';
+import { MemberMessagesComponent } from './components/members/member-messages/member-messages.component';
 
 function tokenGetter() {
   return localStorage.getItem('token');
@@ -51,7 +53,8 @@ function tokenGetter() {
     MemberDetailComponent,
     MemberEditComponent,
     PhotoEditorComponent,
-    TimeAgoExtendsPipe
+    TimeAgoExtendsPipe,
+    MemberMessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +84,7 @@ function tokenGetter() {
     UserService,
     ListsResolver,
     MemberListResolver,
+    MessagesResolver,
     MemberEditResolver,
     MemberDetailResolver,
     PreventUnsavedChanges,

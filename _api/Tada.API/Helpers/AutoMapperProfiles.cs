@@ -26,6 +26,15 @@ namespace Tada.API.Helpers
             CreateMap<PhotoToSaveDto, Photo>();
             CreateMap<UserToUpdateDto, User>();
             CreateMap<UserToRegisterDto, User>();
+            CreateMap<MessageToCreateDto, Message>();
+            CreateMap<Message, MessageToCreateDto>();
+            CreateMap<Message, MessageToReturnDto>()
+                .ForMember(m => m.SenderPhotoUrl, opt => 
+                    opt.MapFrom(m => m.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
+                .ForMember(m => m.ReceiverPhotoUrl, opt => 
+                    opt.MapFrom(m => m.Receiver.Photos.FirstOrDefault(p => p.IsMain).Url));
+
+
         }
     }
 }
