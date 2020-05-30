@@ -9,8 +9,8 @@ using Tada.API.Data;
 namespace Tada.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200528183132_MessageEntityAdded")]
-    partial class MessageEntityAdded
+    [Migration("20200530205824_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,7 +1,6 @@
 using Tada.API.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,6 +13,8 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Tada.API.Helpers;
 using AutoMapper;
+using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tada.API
 {
@@ -26,6 +27,22 @@ namespace Tada.API
 
         public IConfiguration Configuration { get; }
 
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(x => 
+                x.UseSqlite(Configuration.GetConnectionString("LocalConnection")));
+
+            ConfigureServices(services);
+        }
+
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(x => 
+                x.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+            ConfigureServices(services);
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IAuthRepository, AuthRepository>();
@@ -35,7 +52,6 @@ namespace Tada.API
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<LogUserActivity>();
 
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors();
             services.AddAutoMapper(typeof(UserRepository).Assembly);
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
@@ -85,9 +101,13 @@ namespace Tada.API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
