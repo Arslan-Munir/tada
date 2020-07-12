@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Arslan\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Arslan\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="E:\_projects\_tada\_api\Tada.API" t="IncludeRecursive">
+      <e p=".gitignore" t="Include" />
+      <e p="appsettings.Development.json" t="Include" />
+      <e p="appsettings.json" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Controllers" t="Include">
+        <e p="AuthController.cs" t="Include" />
+        <e p="FallbackController.cs" t="Include" />
+        <e p="MessagesController.cs" t="Include" />
+        <e p="PhotoController.cs" t="Include" />
+        <e p="UsersController.cs" t="Include" />
+        <e p="ValuesController.cs" t="Include" />
+      </e>
+      <e p="Data" t="Include">
+        <e p="AuthRepository.cs" t="Include" />
+        <e p="DataContext.cs" t="Include" />
+        <e p="Interfaces" t="Include">
+          <e p="IAuthRepository.cs" t="Include" />
+          <e p="ILikeRepository.cs" t="Include" />
+          <e p="IMessageRepository.cs" t="Include" />
+          <e p="IPhotoRepository.cs" t="Include" />
+          <e p="IRepository.cs" t="Include" />
+          <e p="IUserRepository.cs" t="Include" />
+        </e>
+        <e p="LikeRepository.cs" t="Include" />
+        <e p="MessageRepository.cs" t="Include" />
+        <e p="PhotoRepository.cs" t="Include" />
+        <e p="Repository.cs" t="Include" />
+        <e p="Seeds" t="Include">
+          <e p="Seed.cs" t="Include" />
+          <e p="UserSeedData.json" t="Include" />
+        </e>
+        <e p="UserRepository.cs" t="Include" />
+      </e>
+      <e p="Dockerfile" t="Include" />
+      <e p="Dtos" t="Include">
+        <e p="MessageToCreateDto.cs" t="Include" />
+        <e p="MessageToReturnDto.cs" t="Include" />
+        <e p="PhotosForDetailedDto.cs" t="Include" />
+        <e p="PhotoToReturnDto.cs" t="Include" />
+        <e p="PhotoToSaveDto.cs" t="Include" />
+        <e p="UserForDetailedDto.cs" t="Include" />
+        <e p="UserForListDto.cs" t="Include" />
+        <e p="UserToRegisterDto.cs" t="Include" />
+        <e p="UserToUpdateDto.cs" t="Include" />
+      </e>
+      <e p="Helpers" t="Include">
+        <e p="AutoMapperProfiles.cs" t="Include" />
+        <e p="CloudinarySettings.cs" t="Include" />
+        <e p="Extensions.cs" t="Include" />
+        <e p="LogUserActivity.cs" t="Include" />
+        <e p="MessageParams.cs" t="Include" />
+        <e p="PagedList.cs" t="Include" />
+        <e p="PaginationHeader.cs" t="Include" />
+        <e p="UserParams.cs" t="Include" />
+      </e>
+      <e p="Migrations" t="Include">
+        <e p="20200711103505_Initail_Pg_Schema.cs" t="Include" />
+        <e p="20200711103505_Initail_Pg_Schema.Designer.cs" t="Include" />
+        <e p="DataContextModelSnapshot.cs" t="Include" />
+      </e>
+      <e p="Models" t="Include">
+        <e p="Like.cs" t="Include" />
+        <e p="Message.cs" t="Include" />
+        <e p="Photo.cs" t="Include" />
+        <e p="User.cs" t="Include" />
+        <e p="UserToLoginDto.cs" t="Include" />
+        <e p="Value.cs" t="Include" />
+      </e>
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="netcoreapp3.1" t="Include">
+            <e p="Tada.API.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="launchSettings.json" t="Include" />
+      </e>
+      <e p="Startup.cs" t="Include" />
+      <e p="Tada.API.csproj" t="IncludeRecursive" />
+      <e p="wwwroot" t="Include">
+        <e p="3rdpartylicenses.txt" t="Include" />
+        <e p="assets" t="Include">
+          <e p="user.png" t="Include" />
+        </e>
+        <e p="favicon.ico" t="Include" />
+        <e p="fontawesome-webfont.1e59d2330b4c6deb84b3.ttf" t="Include" />
+        <e p="fontawesome-webfont.20fd1704ea223900efa9.woff2" t="Include" />
+        <e p="fontawesome-webfont.8b43027f47b20503057d.eot" t="Include" />
+        <e p="fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg" t="Include" />
+        <e p="fontawesome-webfont.f691f37e57f04c152e23.woff" t="Include" />
+        <e p="index.html" t="Include" />
+        <e p="main-es2015.b8d722b7cc699c9ee688.js" t="Include" />
+        <e p="main-es5.b8d722b7cc699c9ee688.js" t="Include" />
+        <e p="polyfills-es2015.8824ee8e7376ddf58659.js" t="Include" />
+        <e p="polyfills-es5.b6628c0378073d20b94e.js" t="Include" />
+        <e p="runtime-es2015.cf16196b22f7fa750d68.js" t="Include" />
+        <e p="runtime-es5.cf16196b22f7fa750d68.js" t="Include" />
+        <e p="styles.f5884c7f419cb550289d.css" t="Include" />
+      </e>
+    </e>
+  </component>
+</project>

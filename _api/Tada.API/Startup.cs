@@ -30,7 +30,7 @@ namespace Tada.API
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => 
-                x.UseSqlite(Configuration.GetConnectionString("LocalConnection")));
+                x.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             ConfigureServices(services);
         }
@@ -38,7 +38,7 @@ namespace Tada.API
         public void ConfigureProductionServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => 
-                x.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+                x.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             ConfigureServices(services);
         }

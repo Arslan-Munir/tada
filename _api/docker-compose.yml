@@ -1,0 +1,27 @@
+
+networks:
+  tadaNetwork:
+    name: tadaNetwork
+    
+services:
+  dev:
+    build: Tada.API/
+    restart: always
+    ports:
+      - "8000:80"
+    depends_on:
+      - tada-db-server
+    networks:
+      - tadaNetwork
+  
+  tada-db-server:
+    image: mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-16.04
+    container_name: sql-server-2019
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Sql-server-2019
+      - MSSQL_TCP_PORT=1433
+    ports:
+      - "1400:1433"
+    networks:
+      - tadaNetwork
